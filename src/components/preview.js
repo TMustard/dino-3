@@ -1,20 +1,16 @@
 import React from "react";
 
-export default class Preview extends React.Component {
-  clickHandler = event => {
-    event.target.parentNode.childNodes[1].classList.toggle("hidden");
-  };
+const Preview = ({ showPreview, togglePreview, title }) => {
+  let preview;
+  if (showPreview) preview = <section id="application-preview">{title}</section>;
+  return (
+    <div className="parent">
+      <button id="preview-toggle" onClick={togglePreview}>
+        Show Preview
+      </button>
+      {preview}
+    </div>
+  );
+};
 
-  render() {
-    return (
-      <div className="parent">
-        <button id="preview-toggle" onClick={this.clickHandler}>
-          Show Preview
-        </button>
-        <section id="application-preview" className="hidden">
-          {this.props.title}
-        </section>
-      </div>
-    );
-  }
-}
+export default Preview;

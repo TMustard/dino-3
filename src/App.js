@@ -21,7 +21,6 @@ class App extends Component {
       .then(response => response.json())
       .then(job => {
         this.setState({ job });
-        console.log(this.state);
       });
   };
 

@@ -1,36 +1,25 @@
 import React, { Component } from "react";
 import Preview from "./preview";
 
-class InputForm extends Component {
-  handleChange(event) {
-    const title = event.target.value;
-    this.props.changeTitle(title);
-  }
+const InputForm = ({ changeTitle, handleSubmit, title, showText, showPreview, togglePreview }) => {
+  let submitText;
+  if (showText) submitText = <p id="message">Your application was submitted!</p>;
 
-  handleClick = event => {
-    event.target.parentNode.parentNode.childNodes[1].classList.toggle("hidden");
-  };
-
-  render() {
-    return (
-      <div class="parent">
-        <form id="application-input">
-          <label>Apply Here:</label>
-          <textarea
-            id="application-text"
-            rows="8"
-            cols="100"
-            onKeyUp={this.handleChange.bind(this)}
-          />
-          <input id="submit" type="submit" value="Submit" onClick={this.handleClick} />
-        </form>
-        <p id="message" className="hidden">
-          Your application was submitted!
-        </p>
-        <Preview title={this.props.title} />
-      </div>
-    );
-  }
-}
-
+  return (
+    <div className="parent">
+      <form id="application-input">
+        <label>Apply Here:</label>
+        <textarea
+          id="application-text"
+          rows="8"
+          cols="100"
+          onKeyUp={event => changeTitle(event.target.value)}
+        />
+        <input id="submit" value="Submit" onClick={event => handleSubmit(event)} />
+      </form>
+      {submitText}
+      <Preview title={title} showPreview={showPreview} togglePreview={togglePreview} />
+    </div>
+  );
+};
 export default InputForm;
